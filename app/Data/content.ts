@@ -1675,25 +1675,25 @@ const subDomainUrlContent: any = (() => {
       name: "DEFAULT: Your City",
       publishedAt: "DEFAULT: 2025-01-01",
       slug: "DEFAULT: your-city",
-      metaTitle: "DEFAULT: Affordable Dumpster Rental Services in Your City",
+      metaTitle: "DEFAULT: Affordable Porta Potty Rental Services in Your City",
       metaDescription:
-        "DEFAULT: Looking for reliable dumpster rental in Your City? We offer fast delivery, flexible sizes, and affordable pricing. Call us at [phone]!",
+        "DEFAULT: Looking for reliable Porta Potty rental in Your City? We offer fast delivery, flexible sizes, and affordable pricing. Call us at [phone]!",
       bannerImage:
         "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
-      h1Banner: "DEFAULT: Dumpster Rentals in Your City Near You",
-      h2: "DEFAULT: Your Trusted Dumpster Rental Partner in Your City",
-      p2: "DEFAULT: Whether you're managing a home renovation, clearing out a property, or running a construction site, our dumpster rental service in Your City has the right bin for the job.",
+      h1Banner: "DEFAULT: Porta Potty Rentals in Your City Near You",
+      h2: "DEFAULT: Your Trusted Porta Potty Rental Partner in Your City",
+      p2: "DEFAULT: Whether you're managing a home renovation, clearing out a property, or running a construction site, our Porta Potty rental service in Your City has the right bin for the job.",
       h2Image:
         "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
-      serviceTtile: "DEFAULT: Our Dumpster Rental Services",
+      serviceTtile: "DEFAULT: Our Porta Potty Rental Services",
       needsSection: {
-        title: "DEFAULT: Why Choose Us for Dumpster Rental in Your City",
+        title: "DEFAULT: Why Choose Us for Porta Potty Rental in Your City",
         description: "DEFAULT: Professional service you can trust",
         needslist: [
           {
             title: "DEFAULT: Same-Day Delivery",
             description:
-              "DEFAULT: Get your dumpster when you need it. We offer fast delivery so your project doesn't have to wait.",
+              "DEFAULT: Get your Porta Potty when you need it. We offer fast delivery so your project doesn't have to wait.",
           },
           {
             title: "DEFAULT: Flat-Rate Pricing",
@@ -1703,10 +1703,10 @@ const subDomainUrlContent: any = (() => {
         ],
       },
       processSection: {
-        title: "DEFAULT: How Our Dumpster Rental Process Works",
+        title: "DEFAULT: How Our Porta Potty Rental Process Works",
         processData: [
           {
-            title: "DEFAULT: Choose Your Dumpster",
+            title: "DEFAULT: Choose Your Porta Potty",
             description:
               "DEFAULT: Pick the size that fits your cleanup. Not sure? Our team can help you decide.",
           },
@@ -1977,7 +1977,7 @@ const ContactInfo = contactContent || {
   host: "DEFAULT: portapottyrental.com",
   name: "DEFAULT: Premier Porta Potty Rental",
   address: "DEFAULT: 123 Main Street, Your City, State 12345",
-  service: "DEFAULT: Dumpster Rental",
+  service: "DEFAULT: Porta Potty Rental",
   zipCode: "DEFAULT: 12345",
   bannerImage:
     "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
