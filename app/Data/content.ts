@@ -1,3 +1,12 @@
+// DEFAULT: Import local images with error handling
+let localImages: any = {};
+try {
+  localImages = require("@/local-image-paths.json");
+} catch (error) {
+  console.warn("DEFAULT: local-image-paths.json not found, using ImageKit URLs as fallback");
+  localImages = {};
+}
+
 // DEFAULT: Import statements with enhanced error handling for all JSON content files
 let aboutData: any;
 let blogDataJson: any;
@@ -360,8 +369,9 @@ function ensureTypesDataLists(serviceData: any): any {
                 "DEFAULT: Our porta potties are perfect for events and projects in [location].",
             ),
             h2Image: getValueOrDefault(
-              typedItem?.h2Image,
-              defaultTypesData.lists[index]?.h2Image ||
+              localImages?.typesPage?.lists?.[String(index) as keyof typeof localImages.typesPage.lists] && 'h2Image' in localImages.typesPage.lists[String(index) as keyof typeof localImages.typesPage.lists] ? `/typesPage/${(localImages.typesPage.lists[String(index) as keyof typeof localImages.typesPage.lists] as any).h2Image}` : undefined,
+              typedItem?.h2Image ||
+                defaultTypesData.lists[index]?.h2Image ||
                 "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
             ),
             tyesHeading: getValueOrDefault(
@@ -663,8 +673,9 @@ function ensureServiceDataLists(serviceData: any): any {
             defaultServiceData.lists[index]?.slug || "default-service",
           ),
           imageUrl: getValueOrDefault(
-            item?.imageUrl,
-            defaultServiceData.lists[index]?.imageUrl ||
+            localImages?.servicePage?.lists?.[String(index) as keyof typeof localImages.servicePage.lists] && 'imageUrl' in localImages.servicePage.lists[String(index) as keyof typeof localImages.servicePage.lists] ? `/servicePage/${(localImages.servicePage.lists[String(index) as keyof typeof localImages.servicePage.lists] as any).imageUrl}` : undefined,
+            item?.imageUrl ||
+              defaultServiceData.lists[index]?.imageUrl ||
               "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
           ),
         }))
@@ -727,12 +738,14 @@ const contactContent: any = {
   ),
   zipCode: getValueOrDefault(contactDataJson?.zipCode, "DEFAULT: 12345"),
   bannerImage: getValueOrDefault(
-    contactDataJson?.bannerImage,
-    "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
+    localImages?.ContactInfo?.bannerImage ? `/ContactInfo/${localImages.ContactInfo.bannerImage}` : undefined,
+    contactDataJson?.bannerImage ||
+      "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
   ),
   logoImage: getValueOrDefault(
-    contactDataJson?.logoImage,
-    "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
+    localImages?.ContactInfo?.logoImage ? `/ContactInfo/${localImages.ContactInfo.logoImage}` : undefined,
+    contactDataJson?.logoImage ||
+      "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
   ),
   favicon: getValueOrDefault(contactDataJson?.favicon, "DEFAULT: /favicon.ico"),
   googleAnalytics: getValueOrDefault(
@@ -771,8 +784,9 @@ const aboutContent: any = {
     "DEFAULT: Your Trusted Partner for Waste Management Solutions",
   ),
   bannerImage: getValueOrDefault(
-    aboutBannerImage,
-    "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
+    localImages?.about?.bannerImage ? `/about/${localImages.about.bannerImage}` : undefined,
+    aboutBannerImage ||
+      "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
   ),
   h1Banner: getValueOrDefault(
     h1Banner,
@@ -787,8 +801,9 @@ const aboutContent: any = {
     "DEFAULT: We provide affordable porta potty rental in [location] for event planners, businesses, contractors, and construction sites. Whether you're managing a wedding, hosting a festival, or running a construction project, our porta potties are ready to provide clean, convenient restroom facilities. From standard units to luxury restroom trailers, we deliver the right facilities based on your event or project needs. With flexible rental periods, same-day or next-day delivery, and no hidden fees, our service is trusted by customers who need fast and reliable solutions.",
   ),
   h2Image: getValueOrDefault(
-    h2Image,
-    "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
+    localImages?.about?.h2Image ? `/about/${localImages.about.h2Image}` : undefined,
+    h2Image ||
+      "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
   ),
   missionSection: ensureMissionSection(missionSection),
   areaweserveSection: (() => {
@@ -952,8 +967,9 @@ const blogCategoryMetaMap: any = (() => {
           `DEFAULT: Learn about ${key} related to porta potty rental in [location].`,
         ),
         bannerImage: getValueOrDefault(
-          categoryData?.bannerImage,
-          "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
+          localImages?.blogs?.categories?.[key as keyof typeof localImages.blogs.categories] && 'bannerImage' in localImages.blogs.categories[key as keyof typeof localImages.blogs.categories] ? `/blogs/${(localImages.blogs.categories[key as keyof typeof localImages.blogs.categories] as any).bannerImage}` : undefined,
+          categoryData?.bannerImage ||
+            "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
         ),
       };
     }
@@ -1003,8 +1019,9 @@ const contactPageContent: any = {
     "DEFAULT: Ready to Get Started? Contact Us Today!",
   ),
   bannerImage: getValueOrDefault(
-    contactPageBannerImage,
-    "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
+    localImages?.contact?.bannerImage ? `/contact/${localImages.contact.bannerImage}` : undefined,
+    contactPageBannerImage ||
+      "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
   ),
   h1Banner: getValueOrDefault(
     contactPageH1Banner,
@@ -1016,8 +1033,9 @@ const contactPageContent: any = {
   ),
   h2: getValueOrDefault(h2, "DEFAULT: Get Your Free Quote Today"),
   h2Image: getValueOrDefault(
-    contacth2Image,
-    "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
+    localImages?.contact?.h2Image ? `/contact/${localImages.contact.h2Image}` : undefined,
+    contacth2Image ||
+      "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
   ),
   p2: getValueOrDefault(
     contactp2,
@@ -1029,8 +1047,9 @@ const contactPageContent: any = {
     "DEFAULT: Fast delivery, competitive pricing, and excellent customer service make us the top choice for porta potty rental in [location]. Call [phone] to experience the difference.",
   ),
   h3Image: getValueOrDefault(
-    h3Image,
-    "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
+    localImages?.contact?.h3Image ? `/contact/${localImages.contact.h3Image}` : undefined,
+    h3Image ||
+      "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
   ),
   ctaText: getValueOrDefault(
     ctaText,
@@ -1180,8 +1199,9 @@ const homePageContent: any = {
     "DEFAULT: Fast, Reliable, Affordable",
   ),
   bannerImage: getValueOrDefault(
-    homeBannerImage,
-    "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
+    localImages?.home?.bannerImage ? `/home/${localImages.home.bannerImage}` : undefined,
+    homeBannerImage ||
+      "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
   ),
   h1Banner: getValueOrDefault(
     homeH1Banner,
@@ -1200,8 +1220,9 @@ const homePageContent: any = {
     "DEFAULT: We provide the fastest, most reliable porta potty rental service in [location] with competitive pricing and exceptional customer service.",
   ),
   h2Image: getValueOrDefault(
-    homeh2Image,
-    "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
+    localImages?.home?.h2Image ? `/home/${localImages.home.h2Image}` : undefined,
+    homeh2Image ||
+      "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
   ),
   h3: getValueOrDefault(
     homeh3,
@@ -1212,8 +1233,9 @@ const homePageContent: any = {
     "DEFAULT: From outdoor events to construction projects, we have the right porta potty type for your needs in [location].",
   ),
   h3Image: getValueOrDefault(
-    homeh3Image,
-    "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
+    localImages?.home?.h3Image ? `/home/${localImages.home.h3Image}` : undefined,
+    homeh3Image ||
+      "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
   ),
   mapLink: getValueOrDefault(
     homemapLink,
@@ -1439,8 +1461,9 @@ const locationPageContent: any = {
     "DEFAULT: Serving [location] and Surrounding Areas",
   ),
   bannerImage: getValueOrDefault(
-    locationBannerImage,
-    "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
+    localImages?.location?.bannerImage ? `/location/${localImages.location.bannerImage}` : undefined,
+    locationBannerImage ||
+      "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
   ),
   h1Banner: getValueOrDefault(
     locationH1Banner,
@@ -1521,8 +1544,9 @@ const brandsContent: any = {
     "DEFAULT: Learn about our trusted porta potty rental partners and equipment. We use only the highest quality facilities for reliable service in [location].",
   ),
   bannerImage: getValueOrDefault(
-    brandsBannerImage,
-    "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
+    localImages?.ourBrand?.bannerImage ? `/ourBrand/${localImages.ourBrand.bannerImage}` : undefined,
+    brandsBannerImage ||
+      "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
   ),
   h1Banner: getValueOrDefault(
     brandsH1Banner,
@@ -1534,8 +1558,9 @@ const brandsContent: any = {
     "DEFAULT: We partner with the most reliable suppliers in the industry to ensure you get quality porta potties and professional service every time in [location].",
   ),
   h2Image: getValueOrDefault(
-    brandsh2Image,
-    "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
+    localImages?.ourBrand?.h2Image ? `/ourBrand/${localImages.ourBrand.h2Image}` : undefined,
+    brandsh2Image ||
+      "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
   ),
   brandslist: (() => {
     const defaultBrandsList = [
@@ -1648,8 +1673,9 @@ const servicePageContent: any = {
     "DEFAULT: Professional Porta Potty Rental Services",
   ),
   bannerImage: getValueOrDefault(
-    serviceBannerImage,
-    "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
+    localImages?.servicePage?.bannerImage ? `/servicePage/${localImages.servicePage.bannerImage}` : undefined,
+    serviceBannerImage ||
+      "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
   ),
   h1Banner: getValueOrDefault(
     serviceH1Banner,
@@ -1762,8 +1788,9 @@ const subDomainUrlContent: any = (() => {
           `DEFAULT: Looking for reliable porta potty rental in ${location?.name || key}? We offer fast delivery and clean facilities.`,
         ),
         bannerImage: getValueOrDefault(
-          location?.bannerImage,
-          "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
+          localImages?.location?.locations?.[key as keyof typeof localImages.location.locations] && 'bannerImage' in localImages.location.locations[key as keyof typeof localImages.location.locations] ? `/location/${(localImages.location.locations[key as keyof typeof localImages.location.locations] as any).bannerImage}` : undefined,
+          location?.bannerImage ||
+            "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
         ),
         h1Banner: getValueOrDefault(
           location?.h1Banner,
@@ -1778,8 +1805,9 @@ const subDomainUrlContent: any = (() => {
           `DEFAULT: Professional porta potty rental service in ${location?.name || key} for all your event and project needs.`,
         ),
         h2Image: getValueOrDefault(
-          location?.h2Image,
-          "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
+          localImages?.location?.locations?.[key as keyof typeof localImages.location.locations] && 'h2Image' in localImages.location.locations[key as keyof typeof localImages.location.locations] ? `/location/${(localImages.location.locations[key as keyof typeof localImages.location.locations] as any).h2Image}` : undefined,
+          location?.h2Image ||
+            "https://ik.imagekit.io/h7rza8886p/Default1.jpg?updatedAt=1757319001930",
         ),
         serviceTtile: getValueOrDefault(
           location?.serviceTtile,
